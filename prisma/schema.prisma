@@ -10,7 +10,7 @@ datasource db {
 model Account {
   id          String        @id @default(cuid())
   email       String        @unique
-  name        String?
+  name        String
   type        ClientType
   createdAt   DateTime      @default(now())
   deposits    Deposits[]
@@ -24,14 +24,14 @@ enum ClientType {
 
 model Deposits {
   id            String        @id @default(cuid())
-  account       Account?      @relation(fields: [accountId], references: [id])
-  accountId     String? // Made due to annoted types
+  account       Account       @relation(fields: [accountId], references: [id])
+  accountId     String // Made due to annoted types
   depositNumber String        @unique
   metalType     String // Gold, Silver and Platinum , etc.. 
   storageType   StorageType
   quantity      Float // In Kg
   barSerial     String?       @unique // When allocated storage-- Helps identify specific allocated metals 
-  createdAt     DateTime      @default(now())
+  depositedAt   DateTime      @default(now())
   withdrawals   Withdrawals[]
 }
 
@@ -42,11 +42,12 @@ enum StorageType {
 
 model Withdrawals {
   id               String      @id @default(cuid())
-  account          Account?    @relation(fields: [accountID], references: [id])
-  accountID        String?
+  account          Account     @relation(fields: [accountID], references: [id])
+  accountID        String
   withdrawalNumber String      @unique
   barSerial        Deposits?   @relation(fields: [barSerialNumber], references: [barSerial])
   barSerialNumber  String? // In case they withdraw a metal from an allocated storage
   storageType      StorageType
   quantity         Float // In Kg
+  withdrawnAt      DateTime    @default(now())
 }
