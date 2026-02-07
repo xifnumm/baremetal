@@ -9,11 +9,12 @@ import {
 export function SideNav() {
 	return (
 		<Sidebar>
-			<SidebarHeader>
-				<SidebarContent>
-					<SidebarGroup />
-				</SidebarContent>
-			</SidebarHeader>
+			<SidebarHeader></SidebarHeader>
+			<SidebarContent>
+				<SidebarGroup />
+				<SidebarGroup />
+				<SidebarGroup />
+			</SidebarContent>
 			<SidebarFooter></SidebarFooter>
 		</Sidebar>
 	);

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 
@@ -14,11 +13,15 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<SidebarProvider>
-			<main>
-				<SidebarTrigger />
-				{children}
-			</main>
-		</SidebarProvider>
+		<html lang="en">
+			<body>
+				<SidebarProvider>
+					<main>
+						<SidebarTrigger />
+						{children}
+					</main>
+				</SidebarProvider>
+			</body>
+		</html>
 	);
 }
