@@ -43,8 +43,8 @@ enum StorageType {
 
 model Withdrawals {
   id               String      @id @default(cuid())
-  account          Account     @relation(fields: [accountID], references: [id])
-  accountID        String
+  account          Account     @relation(fields: [accountId], references: [id])
+  accountId        String
   withdrawalNumber String      @unique
   deposit          Deposits?   @relation(fields: [depositId], references: [id])
   depositId        String? // In case they withdraw a metal from an allocated storage

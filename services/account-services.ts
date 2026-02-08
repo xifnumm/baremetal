@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '../app/generated/prisma/client';
+import { ClientType } from '../app/generated/prisma/client';
 
 const connectionString = `${process.env.DATABASE_URL}`;
 
@@ -8,11 +9,7 @@ const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
 export class AccountService {
-	async createAccount(data: {
-		email: string;
-		name: string;
-		type: ClientTypes;
-	}) {
+	async createAccount(data: { email: string; name: string; type: ClientType }) {
 		const account = await prisma.account.create({
 			data: {
 				email: data.email,
