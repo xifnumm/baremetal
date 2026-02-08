@@ -23,16 +23,17 @@ enum ClientType {
 }
 
 model Deposits {
-  id            String        @id @default(cuid())
-  account       Account       @relation(fields: [accountId], references: [id])
-  accountId     String // Made due to annoted types
-  depositNumber String        @unique
-  metalType     String // Gold, Silver and Platinum , etc.. 
-  storageType   StorageType
-  quantity      Float // In Kg
-  barSerial     String?       @unique // When allocated storage-- Helps identify specific allocated metals 
-  depositedAt   DateTime      @default(now())
-  withdrawals   Withdrawals[]
+  id                String        @id @default(cuid())
+  account           Account       @relation(fields: [accountId], references: [id])
+  accountId         String // Made due to annoted types
+  depositNumber     String        @unique
+  metalType         String // Gold, Silver and Platinum , etc.. 
+  storageType       StorageType
+  quantity          Float // In Kg
+  remainingQuantity Float // In Kg
+  barSerial         String?       @unique // When allocated storage-- Helps identify specific allocated metals
+  depositedAt       DateTime      @default(now())
+  withdrawals       Withdrawals[]
 }
 
 enum StorageType {
@@ -45,9 +46,11 @@ model Withdrawals {
   account          Account     @relation(fields: [accountID], references: [id])
   accountID        String
   withdrawalNumber String      @unique
-  barSerial        Deposits?   @relation(fields: [barSerialNumber], references: [barSerial])
-  barSerialNumber  String? // In case they withdraw a metal from an allocated storage
+  deposit          Deposits?   @relation(fields: [depositId], references: [id])
+  depositId        String? // In case they withdraw a metal from an allocated storage
+  barSerial        String?     @unique // When allocated storage-- Helps identify specific allocated metals
   storageType      StorageType
   quantity         Float // In Kg
   withdrawnAt      DateTime    @default(now())
+  metalType        String // Gold, Silver and Platinum , etc..
 }
