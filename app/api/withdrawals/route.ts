@@ -1,4 +1,3 @@
-// File: src/app/api/withdrawals/route.ts
 import { NextResponse } from 'next/server';
 import { WithdrawalService } from '@/services/withdraw-services';
 import { createWithdrawalSchema } from '@/lib/validations';

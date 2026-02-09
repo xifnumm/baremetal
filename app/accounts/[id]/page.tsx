@@ -49,12 +49,13 @@ async function getAccountWithPortfolio(id: string) {
 	return { account, totalValue, metalHoldings };
 }
 
-export default async function AccountDetailPage({
-	params,
-}: {
-	params: { id: string };
+export default async function AccountDetailPage(props: {
+	params: Promise<{ id: string }>;
 }) {
-	const data = await getAccountWithPortfolio(params.id);
+	const params = await props.params;
+	const id = params.id;
+
+	const data = await getAccountWithPortfolio(id);
 
 	if (!data) {
 		notFound();

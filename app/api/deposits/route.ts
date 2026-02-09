@@ -1,4 +1,3 @@
-// File: src/app/api/deposits/route.ts
 import { NextResponse } from 'next/server';
 import { DepositService } from '@/services/deposit-services';
 import { createDepositSchema } from '@/lib/validations/deposit';
